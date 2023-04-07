@@ -1,3 +1,3 @@
-My implementation of Mandelbrot fractal using SDL2 library.
--Zoom feature
+My implementation of Mandelbrot fractal using SDL2 library.\n
+-Zoom feature\n
 -Double buffering
