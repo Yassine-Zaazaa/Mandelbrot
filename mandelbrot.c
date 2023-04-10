@@ -5,7 +5,7 @@
 
 #define HEIGHT 600
 #define WIDTH 800
-#define MAX_ITER 1000
+#define MAX_ITER 500
 
 typedef struct s_complex{
 	double x;
@@ -62,12 +62,12 @@ int	main()
 					break;
 				case SDL_MOUSEWHEEL:
 					if(event.wheel.y > 0)
-							zoom *= 1.01;
+							zoom *= 1.1;
 
 					else if(event.wheel.y < 0)
-							zoom /= 1.01;
-					center.x += (1 - 1 / zoom) * (cursor_x / WIDTH * 3.5 - 2.5);
-    	    		center.y += (1 - 1 / zoom) * (cursor_y / HEIGHT * 2 - 1);
+							zoom /= 1.1;
+					center.x +=(cursor_x / WIDTH - 0.5) / zoom;
+    	    		center.y +=(cursor_y / HEIGHT - 0.5) / zoom;
 					break;
 			}
 		}
@@ -93,8 +93,13 @@ int	main()
 					z = tmp;
 					iterations++;
 				}
-				int color = iterations % 8 * 35;
-				SDL_SetRenderDrawColor(render, color, color, color, 255);
+				if(iterations == MAX_ITER)
+					SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
+				else
+				{
+					int color = iterations % 8 * 32;
+					SDL_SetRenderDrawColor(render, color, color, color, 255);
+				}
 				SDL_RenderDrawPoint(render, x, y);
 			}
 		}
